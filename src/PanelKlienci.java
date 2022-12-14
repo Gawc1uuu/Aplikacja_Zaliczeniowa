@@ -119,6 +119,7 @@ public class PanelKlienci extends JPanel implements ActionListener {
             email.setText("");
             nrTel.setText("");
             nrLokalu.setText("");
+
         }
 
     }
