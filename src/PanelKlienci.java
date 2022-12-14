@@ -5,6 +5,15 @@ import java.io.File;
 
 public class PanelKlienci extends JPanel implements ActionListener {
 
+    String createTableString = "CREATE TABLE IF NOT EXISTS klienci(id_klient int not null primary key auto_increment," +
+            "Imie varchar(50) not null," +
+            "Nazwisko varchar(50) not null," +
+            "Email varchar(50) not null," +
+            "Ulica varchar(50) not null," +
+            "NrLokalu varchar(10)," +
+            "NrTel varchar(15) not null)";
+
+    String lokal = null;
     JButton wyczysc;
     JButton dodaj;
     JButton wroc;
@@ -15,6 +24,8 @@ public class PanelKlienci extends JPanel implements ActionListener {
     JTextField ulica;
     JTextField nrLokalu;
     JTextField nrTel;
+
+    DBManager db = new DBManager();
 
     public PanelKlienci(){
         this.setLayout(null);
@@ -43,6 +54,7 @@ public class PanelKlienci extends JPanel implements ActionListener {
         JLabel nrLokaluLabel = new JLabel("Nr lokalu: ");
         nrLokaluLabel.setBounds(300,300,50,30);
         nrLokalu = new JTextField();
+        nrLokalu.setText(null);
         nrLokalu.setBounds(350,300,150,30);
 
         JLabel nrTelLabel = new JLabel("Nr telefonu: ");
@@ -84,6 +96,23 @@ public class PanelKlienci extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == wyczysc) {
+            imie.setText("");
+            nazwisko.setText("");
+            ulica.setText("");
+            email.setText("");
+            nrTel.setText("");
+            nrLokalu.setText("");
+        }else if(e.getSource()==dodaj){
+            System.out.println(imie.getText());
+            System.out.println(nazwisko.getText());
+            System.out.println(email.getText());
+            System.out.println(ulica.getText());
+            System.out.println(nrLokalu.getText());
+            System.out.println(nrTel.getText());
+            db.useDatabase();
+            db.createTable(createTableString);
+            String insertString = "INSERT INTO klienci(Imie,Nazwisko,Email,Ulica,NrLokalu,NrTel) values('"+imie.getText()+"','"+nazwisko.getText()+"','"+email.getText()+"','"+ulica.getText()+"','"+nrLokalu.getText()+"','"+nrTel.getText()+"')";
+            db.insert(insertString);
             imie.setText("");
             nazwisko.setText("");
             ulica.setText("");
