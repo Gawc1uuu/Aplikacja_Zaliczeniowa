@@ -116,7 +116,6 @@ public class PanelDodawanie extends JPanel implements ActionListener {
             db.insert(insertString);
             autor.setText("");
             tytul.setText("");
-            filePath="";
         }
     }
 

@@ -53,6 +53,7 @@ public class MyFrame extends JFrame implements ActionListener {
          startPanel = new StartPanel();
          startPanel.button3.addActionListener(this);
          startPanel.button4.addActionListener(this);
+         startPanel.button2.addActionListener(this);
 
          panelDodawanie = new PanelDodawanie();
          panelDodawanie.wyczysc.addActionListener(this);
@@ -78,6 +79,7 @@ public class MyFrame extends JFrame implements ActionListener {
         this.add(startPanel);
         this.add(panelDodawanie);
         this.add(panelKlienci);
+        this.add(panelWypozyczenia);
         this.setVisible(true);
     }
 
@@ -100,6 +102,9 @@ public class MyFrame extends JFrame implements ActionListener {
         else if(e.getSource()==panelWypozyczenia.wroc){
             startPanel.setVisible(true);
             panelWypozyczenia.setVisible(false);
+        }else if(e.getSource()==startPanel.button2){
+            startPanel.setVisible(false);
+            panelWypozyczenia.setVisible(true);
         }
     }
 

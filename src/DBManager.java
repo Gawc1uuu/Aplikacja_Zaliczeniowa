@@ -1,7 +1,11 @@
+import javax.swing.*;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBManager {
 
+    DefaultComboBoxModel comboBoxModel1 = new DefaultComboBoxModel();
+    DefaultComboBoxModel comboBoxModel2 = new DefaultComboBoxModel();
 
     public void delete(String sqlDelete){
         try{
@@ -13,16 +17,28 @@ public class DBManager {
             System.out.println(e);
         }
     }
-    public void select(String sqlSelect){
+    public void select(String sqlSelect,String columnLabel1,String columnLabel2){
+        int i=0;
         try{
             Connection conn = getConnection();
             PreparedStatement select = conn.prepareStatement(sqlSelect);
             ResultSet result = select.executeQuery();
             while(result.next()){
-                System.out.print("ID: " + result.getInt("id"));
-                System.out.print(", Age: " + result.getString("first_name"));
-                System.out.print(", First: " + result.getString("last_name"));
-                System.out.println(", Last: " + result.getString("email"));
+                comboBoxModel2.addElement( result.getString(columnLabel1)+" "+result.getString(columnLabel2));
+            }
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+    }
+    public void select(String sqlSelect,String columnLabel1,String columnLabel2,String columnLabel3){
+        int i=0;
+        try{
+            Connection conn = getConnection();
+            PreparedStatement select = conn.prepareStatement(sqlSelect);
+            ResultSet result = select.executeQuery();
+            while(result.next()){
+                comboBoxModel1.addElement(result.getString(columnLabel1)+" "+result.getString(columnLabel2)+" "+result.getString(columnLabel3));
             }
         }
         catch (Exception e){

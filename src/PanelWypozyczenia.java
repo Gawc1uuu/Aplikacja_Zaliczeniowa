@@ -1,14 +1,25 @@
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.EventListener;
 
 public class PanelWypozyczenia extends JPanel implements ActionListener {
+    String createTableString = "CREATE TABLE IF NOT EXISTS wypozyczenia(id_w int not null primary key auto_increment," +
+            "id_k int ," +
+            "id_klient int ," +
+            "DataWyp date not null)";
 
-    JComboBox wyborKsiazki = new JComboBox();
+//    String alterTableString1 = "ALTER TABLE wypozyczenia ADD FOREIGN KEY (id_k) REFERENCES ksiazki(id_k)";
+//    String alterTableString2 = "ALTER TABLE wypozyczenia ADD FOREIGN KEY (id_klient) REFERENCES klienci(id_klient)";
 
-    JComboBox wyborKlienta = new JComboBox();
 
     Date dataWypozyczenia = new Date();
 
@@ -20,10 +31,50 @@ public class PanelWypozyczenia extends JPanel implements ActionListener {
 
     JButton wyczysc = new JButton("Wyczysc");
 
+    DBManager db = new DBManager();
+
+
+    String sqlSelectString1 = "SELECT * FROM klienci";
+
+    String sqlSelectString2 = "SELECT * FROM ksiazki";
+
+    JComboBox wyborKsiazki;
+
+    JComboBox wyborKlienta;
+
+    UtilDateModel model;
+
+    JDatePanelImpl datePanel;
+
+    JDatePickerImpl datePicker;
+
+    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
     public PanelWypozyczenia(){
+
+        db.select(sqlSelectString2,"id_k","Tytul");
+        db.select(sqlSelectString1,"id_klient","Imie","Nazwisko");
 
         this.setLayout(null);
         this.setBounds(0,0,800,600);
+
+        wyborKlienta = new JComboBox(db.comboBoxModel1);
+        JLabel wyborKlientaLabel = new JLabel("kto wypozycza: ");
+        wyborKlientaLabel.setBounds(250,100,120,30);
+        wyborKlienta.setBounds(350,100,150,30);
+
+        wyborKsiazki = new JComboBox(db.comboBoxModel2);
+        JLabel wyborKsiazkiLabel = new JLabel("wybierz ksiazke: ");
+        wyborKsiazkiLabel.setBounds(250,150,120,30);
+        wyborKsiazki.setBounds(350,150,150,30);
+
+        JLabel dataZwrotu = new JLabel("Wybierz date zwrotu: ");
+        dataZwrotu.setBounds(220,200,150,30);
+        model = new UtilDateModel();
+        datePanel = new JDatePanelImpl(model);
+        datePicker = new JDatePickerImpl(datePanel,null);
+        datePicker.setBounds(350,200,150,30);
+
 
         wyczysc.setBounds(410,400,200,40);
         wyczysc.addActionListener(this);
@@ -35,9 +86,31 @@ public class PanelWypozyczenia extends JPanel implements ActionListener {
         wroc.setBounds(300,450,200,40);
 
 
+        this.add(datePicker);
+        this.add(dataZwrotu);
+        this.add(wyborKlientaLabel);
+        this.add(wyborKsiazkiLabel);
+        this.add(wyborKsiazki);
+        this.add(wyborKlienta);
+        this.add(wroc);
+        this.add(wyczysc);
+        this.add(dodaj);
+        this.setVisible(false);
+
+
     }
 
     public void actionPerformed(ActionEvent e){
+        if(e.getSource()==dodaj){
+            System.out.println(wyborKlienta.getSelectedItem().toString().charAt(0));
+            System.out.println(wyborKsiazki.getSelectedItem().toString().charAt(0));
+            System.out.println(df.format(datePicker.getModel().getValue()));
+            db.useDatabase();
+            db.createTable(createTableString);
+//            db.createTable(alterTableString1);
+//            db.createTable(alterTableString2);
+            db.insert("INSERT INTO wypozyczenia(id_klient,id_k,dataWyp) values("+wyborKlienta.getSelectedItem().toString().charAt(0)+","+wyborKsiazki.getSelectedItem().toString().charAt(0)+",'"+df.format(datePicker.getModel().getValue())+"')");
+        }
 
     }
 
