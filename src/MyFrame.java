@@ -14,6 +14,8 @@ public class MyFrame extends JFrame implements ActionListener {
     PanelDodawanie panelDodawanie;
 
     PanelKlienci panelKlienci;
+
+    PanelWypozyczenia panelWypozyczenia;
     MyFrame(){
 
 //        ImageIcon image = new ImageIcon("Untitled.png");
@@ -61,6 +63,9 @@ public class MyFrame extends JFrame implements ActionListener {
         panelKlienci= new PanelKlienci();
         panelKlienci.wroc.addActionListener(this);
 
+        panelWypozyczenia = new PanelWypozyczenia();
+        panelWypozyczenia.wroc.addActionListener(this);
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setLayout(null);
@@ -91,6 +96,10 @@ public class MyFrame extends JFrame implements ActionListener {
         }else if(e.getSource()==startPanel.button4){
             startPanel.setVisible(false);
             panelKlienci.setVisible(true);
+        }
+        else if(e.getSource()==panelWypozyczenia.wroc){
+            startPanel.setVisible(true);
+            panelWypozyczenia.setVisible(false);
         }
     }
 
