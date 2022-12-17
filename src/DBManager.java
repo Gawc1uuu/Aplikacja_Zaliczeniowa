@@ -7,6 +7,10 @@ public class DBManager {
     DefaultComboBoxModel comboBoxModel1 = new DefaultComboBoxModel();
     DefaultComboBoxModel comboBoxModel2 = new DefaultComboBoxModel();
 
+
+   ArrayList<String> results = new ArrayList<>();
+
+
     public void delete(String sqlDelete){
         try{
             Connection conn = getConnection();
@@ -40,6 +44,22 @@ public class DBManager {
             while(result.next()){
                 comboBoxModel1.addElement(result.getString(columnLabel1)+" "+result.getString(columnLabel2)+" "+result.getString(columnLabel3));
             }
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+    }
+    public void selectAll(String sqlSelect,String columnLabel1,String columnLabel2,String columnLabel3,String columnLabel4,String columnLabel5){
+
+        try{
+            Connection conn = getConnection();
+            PreparedStatement select = conn.prepareStatement(sqlSelect);
+            ResultSet result = select.executeQuery();
+            while(result.next()){
+                System.out.println(result.getString(columnLabel1)+" "+result.getString(columnLabel2)+" "+result.getString(columnLabel3)+" "+result.getString(columnLabel4)+" "+result.getString(columnLabel5));
+                results.add(result.getString(columnLabel1)+" "+result.getString(columnLabel2)+" "+result.getString(columnLabel3)+" "+result.getString(columnLabel4)+" "+result.getString(columnLabel5));
+            }
+            System.out.println(results);
         }
         catch (Exception e){
             System.out.println(e);

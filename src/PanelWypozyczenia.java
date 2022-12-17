@@ -17,8 +17,8 @@ public class PanelWypozyczenia extends JPanel implements ActionListener {
             "id_klient int ," +
             "DataWyp date not null)";
 
-//    String alterTableString1 = "ALTER TABLE wypozyczenia ADD FOREIGN KEY (id_k) REFERENCES ksiazki(id_k)";
-//    String alterTableString2 = "ALTER TABLE wypozyczenia ADD FOREIGN KEY (id_klient) REFERENCES klienci(id_klient)";
+    String alterTableString1 = "ALTER TABLE wypozyczenia ADD FOREIGN KEY (id_k) REFERENCES ksiazki(id_k)";
+    String alterTableString2 = "ALTER TABLE wypozyczenia ADD FOREIGN KEY (id_klient) REFERENCES klienci(id_klient)";
 
 
     Date dataWypozyczenia = new Date();
@@ -50,10 +50,11 @@ public class PanelWypozyczenia extends JPanel implements ActionListener {
 
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
+
     public PanelWypozyczenia(){
 
-        db.select(sqlSelectString2,"id_k","Tytul");
-        db.select(sqlSelectString1,"id_klient","Imie","Nazwisko");
+//        db.select(sqlSelectString2,"id_k","Tytul");
+//        db.select(sqlSelectString1,"id_klient","Imie","Nazwisko");
 
         this.setLayout(null);
         this.setBounds(0,0,800,600);
@@ -107,8 +108,8 @@ public class PanelWypozyczenia extends JPanel implements ActionListener {
             System.out.println(df.format(datePicker.getModel().getValue()));
             db.useDatabase();
             db.createTable(createTableString);
-//            db.createTable(alterTableString1);
-//            db.createTable(alterTableString2);
+            db.createTable(alterTableString1);
+            db.createTable(alterTableString2);
             db.insert("INSERT INTO wypozyczenia(id_klient,id_k,dataWyp) values("+wyborKlienta.getSelectedItem().toString().charAt(0)+","+wyborKsiazki.getSelectedItem().toString().charAt(0)+",'"+df.format(datePicker.getModel().getValue())+"')");
         }
 

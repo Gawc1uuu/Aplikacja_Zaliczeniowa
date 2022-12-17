@@ -15,6 +15,7 @@ public class MyFrame extends JFrame implements ActionListener {
 
     PanelKlienci panelKlienci;
 
+    PanelWypozyczone panelWypozyczone;
     PanelWypozyczenia panelWypozyczenia;
     MyFrame(){
 
@@ -54,6 +55,7 @@ public class MyFrame extends JFrame implements ActionListener {
          startPanel.button3.addActionListener(this);
          startPanel.button4.addActionListener(this);
          startPanel.button2.addActionListener(this);
+         startPanel.button1.addActionListener(this);
 
          panelDodawanie = new PanelDodawanie();
          panelDodawanie.wyczysc.addActionListener(this);
@@ -66,6 +68,9 @@ public class MyFrame extends JFrame implements ActionListener {
 
         panelWypozyczenia = new PanelWypozyczenia();
         panelWypozyczenia.wroc.addActionListener(this);
+
+        panelWypozyczone = new PanelWypozyczone();
+        panelWypozyczone.wroc.addActionListener(this);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -80,6 +85,7 @@ public class MyFrame extends JFrame implements ActionListener {
         this.add(panelDodawanie);
         this.add(panelKlienci);
         this.add(panelWypozyczenia);
+        this.add(panelWypozyczone);
         this.setVisible(true);
     }
 
@@ -102,9 +108,19 @@ public class MyFrame extends JFrame implements ActionListener {
         else if(e.getSource()==panelWypozyczenia.wroc){
             startPanel.setVisible(true);
             panelWypozyczenia.setVisible(false);
+            panelWypozyczenia.db.comboBoxModel1.removeAllElements();
+            panelWypozyczenia.db.comboBoxModel2.removeAllElements();
         }else if(e.getSource()==startPanel.button2){
             startPanel.setVisible(false);
             panelWypozyczenia.setVisible(true);
+            panelWypozyczenia.db.select(panelWypozyczenia.sqlSelectString2,"id_k","Tytul");
+            panelWypozyczenia.db.select(panelWypozyczenia.sqlSelectString1,"id_klient","Imie","Nazwisko");
+        }else if(e.getSource()==startPanel.button1){
+            startPanel.setVisible(false);
+            panelWypozyczone.setVisible(true);
+        }else if(e.getSource()==panelWypozyczone.wroc) {
+            startPanel.setVisible(true);
+            panelWypozyczone.setVisible(false);
         }
     }
 
