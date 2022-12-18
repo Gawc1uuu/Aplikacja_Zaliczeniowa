@@ -8,7 +8,7 @@ public class DBManager {
     DefaultComboBoxModel comboBoxModel2 = new DefaultComboBoxModel();
 
 
-   ArrayList<String> results = new ArrayList<>();
+   ArrayList<String> results;
 
 
     public void delete(String sqlDelete){
@@ -50,7 +50,7 @@ public class DBManager {
         }
     }
     public void selectAll(String sqlSelect,String columnLabel1,String columnLabel2,String columnLabel3,String columnLabel4,String columnLabel5){
-
+        results = new ArrayList<>();
         try{
             Connection conn = getConnection();
             PreparedStatement select = conn.prepareStatement(sqlSelect);
@@ -80,7 +80,7 @@ public class DBManager {
         try{
 
             String driver = "com.mysql.cj.jdbc.Driver";
-            String databaseurl="jdbc:mysql://localhost:3306/ksiegarnia";
+            String databaseurl="jdbc:mysql://localhost:3307/ksiegarnia";
             String username="root";
             String password="";
             Class.forName(driver);

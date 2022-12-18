@@ -85,7 +85,7 @@ public class MyFrame extends JFrame implements ActionListener {
         this.add(panelDodawanie);
         this.add(panelKlienci);
         this.add(panelWypozyczenia);
-        this.add(panelWypozyczone);
+//        this.add(panelWypozyczone);
         this.setVisible(true);
     }
 
@@ -116,7 +116,7 @@ public class MyFrame extends JFrame implements ActionListener {
             panelWypozyczenia.db.select(panelWypozyczenia.sqlSelectString2,"id_k","Tytul");
             panelWypozyczenia.db.select(panelWypozyczenia.sqlSelectString1,"id_klient","Imie","Nazwisko");
         }else if(e.getSource()==startPanel.button1){
-            startPanel.setVisible(false);
+            panelWypozyczone.db.selectAll(panelWypozyczone.selectString,"wypozyczenia.id_w","ksiazki.tytul","klienci.imie","klienci.nazwisko","wypozyczenia.DataWyp");
             panelWypozyczone.setVisible(true);
         }else if(e.getSource()==panelWypozyczone.wroc) {
             startPanel.setVisible(true);
