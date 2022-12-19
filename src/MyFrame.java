@@ -9,6 +9,7 @@ public class MyFrame extends JFrame implements ActionListener {
 
 //    Image backgroundImage;
 
+    DBManager db = new DBManager();
     StartPanel startPanel;
 
     PanelDodawanie panelDodawanie;
@@ -18,7 +19,13 @@ public class MyFrame extends JFrame implements ActionListener {
     PanelWypozyczone panelWypozyczone;
     PanelWypozyczenia panelWypozyczenia;
     MyFrame(){
-
+//        startPanel.db.createDatabase();
+//        startPanel.db.useDatabase();
+//        panelKlienci.db.createTable(panelKlienci.createTableString);
+//        panelDodawanie.db.createTable(panelDodawanie.createTableString);
+//        panelWypozyczenia.db.createTable(panelWypozyczenia.createTableString);
+//        panelWypozyczenia.db.createTable(panelWypozyczenia.alterTableString1);
+//        panelWypozyczenia.db.createTable(panelWypozyczenia.alterTableString2);
 //        ImageIcon image = new ImageIcon("Untitled.png");
 //        background = new JLabel("",image,JLabel.CENTER);
 //        background.setBounds(0,0,800,600);
@@ -44,9 +51,9 @@ public class MyFrame extends JFrame implements ActionListener {
 //        this.add(background);
 //        this.setVisible(true);
 
-//        ImageIcon image = new ImageIcon("czytus.png");
-//        JLabel background = new JLabel("",image,JLabel.CENTER);
-//        background.setBounds(0,0,800,600);
+
+
+
 
 
 
@@ -79,8 +86,9 @@ public class MyFrame extends JFrame implements ActionListener {
         this.setSize(800,600);
 
 
-        ImageIcon image = new ImageIcon("book.png");
-        this.setIconImage(image.getImage());
+
+        ImageIcon image1 = new ImageIcon(this.getClass().getResource("book.png"));
+        this.setIconImage(image1.getImage());
         this.add(startPanel);
         this.add(panelDodawanie);
         this.add(panelKlienci);

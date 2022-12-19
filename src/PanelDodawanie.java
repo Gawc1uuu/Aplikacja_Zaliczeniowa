@@ -36,7 +36,7 @@ public class PanelDodawanie extends JPanel implements ActionListener {
 
         this.setLayout(null);
         this.setBounds(0,0,800,600);
-
+        this.setBackground(Color.BLACK);
         JLabel tytulLabel = new JLabel("Tytuł: ");
         tytulLabel.setBounds(300,100,50,30);
          tytul = new JTextField();

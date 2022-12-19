@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -28,39 +29,41 @@ public class PanelKlienci extends JPanel implements ActionListener {
     DBManager db = new DBManager();
 
     public PanelKlienci(){
+
         this.setLayout(null);
         this.setBounds(0,0,800,600);
+    this.setBackground(Color.BLACK);
 
         JLabel imieLabel= new JLabel("Imie: ");
-        imieLabel.setBounds(300,100,50,30);
+        imieLabel.setBounds(150,100,50,30);
         imie = new JTextField();
-        imie.setBounds(350,100,150,30);
+        imie.setBounds(200,100,150,30);
 
         JLabel nazwiskoLabel= new JLabel("Nazwisko: ");
-        nazwiskoLabel.setBounds(300,150,50,30);
+        nazwiskoLabel.setBounds(430,100,80,30);
         nazwisko = new JTextField();
-        nazwisko.setBounds(350,150,150,30);
+        nazwisko.setBounds(500,100,150,30);
 
         JLabel emailLabel = new JLabel("E-mail: ");
-        emailLabel.setBounds(300,200,50,30);
+        emailLabel.setBounds(150,150,50,30);
        email = new JTextField();
-        email.setBounds(350,200,150,30);
+        email.setBounds(200,150,150,30);
 
         JLabel ulicaLabel = new JLabel("Ulica: ");
-        ulicaLabel.setBounds(300,250,50,30);
+        ulicaLabel.setBounds(450,150,50,30);
         ulica = new JTextField();
-        ulica.setBounds(350,250,150,30);
+        ulica.setBounds(500,150,150,30);
 
         JLabel nrLokaluLabel = new JLabel("Nr lokalu: ");
-        nrLokaluLabel.setBounds(300,300,50,30);
+        nrLokaluLabel.setBounds(150,200,50,30);
         nrLokalu = new JTextField();
         nrLokalu.setText(null);
-        nrLokalu.setBounds(350,300,150,30);
+        nrLokalu.setBounds(200,200,150,30);
 
         JLabel nrTelLabel = new JLabel("Nr telefonu: ");
-        nrTelLabel.setBounds(300,350,50,30);
+        nrTelLabel.setBounds(450,200,50,30);
         nrTel = new JTextField();
-        nrTel.setBounds(350,350,150,30);
+        nrTel.setBounds(500,200,150,30);
 
         wyczysc = new JButton("Wyczysc");
         wyczysc.setBounds(410,400,200,40);

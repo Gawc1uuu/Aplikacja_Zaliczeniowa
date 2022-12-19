@@ -3,6 +3,7 @@ import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -52,13 +53,16 @@ public class PanelWypozyczenia extends JPanel implements ActionListener {
 
 
     public PanelWypozyczenia(){
-
+        db.createTable(createTableString);
+        db.createTable(alterTableString1);
+        db.createTable(alterTableString2);
 //        db.select(sqlSelectString2,"id_k","Tytul");
 //        db.select(sqlSelectString1,"id_klient","Imie","Nazwisko");
 
         this.setLayout(null);
         this.setBounds(0,0,800,600);
 
+        this.setBackground(Color.BLACK);
         wyborKlienta = new JComboBox(db.comboBoxModel1);
         JLabel wyborKlientaLabel = new JLabel("kto wypozycza: ");
         wyborKlientaLabel.setBounds(250,100,120,30);
@@ -77,14 +81,11 @@ public class PanelWypozyczenia extends JPanel implements ActionListener {
         datePicker.setBounds(350,200,150,30);
 
 
-        wyczysc.setBounds(410,400,200,40);
-        wyczysc.addActionListener(this);
-
         dodaj.setBounds(190,400,200,40);
         dodaj.addActionListener(this);
 
         wroc = new JButton("Wroc");
-        wroc.setBounds(300,450,200,40);
+        wroc.setBounds(410,400,200,40);
 
 
         this.add(datePicker);
@@ -94,7 +95,6 @@ public class PanelWypozyczenia extends JPanel implements ActionListener {
         this.add(wyborKsiazki);
         this.add(wyborKlienta);
         this.add(wroc);
-        this.add(wyczysc);
         this.add(dodaj);
         this.setVisible(false);
 
